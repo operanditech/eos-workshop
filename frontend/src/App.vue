@@ -5,7 +5,8 @@
         <img alt="EOS logo" src="./assets/eos-logo.png" width="100px">
         <div class="header-text">
           <h1>EOSIO Workshop</h1>
-          <h2>Story Builder</h2>
+          <h2 class="text-primary">Cool Story Bro</h2>
+          <h4>Story Builder</h4>
         </div>
       </div>
       <b-row>
