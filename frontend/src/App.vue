@@ -46,7 +46,7 @@
                         maxlength="12"
                         v-model="newStory.id"
                         required
-                        placeholder="coolstorybro">
+                        placeholder="awesomestory">
           </b-form-input>
         </b-form-group>
         <b-form-group label="Title"
