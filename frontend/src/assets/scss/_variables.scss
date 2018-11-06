@@ -1,0 +1,19 @@
+/*! `Custom` Bootstrap 4 theme */
+@import url("https://use.fontawesome.com/releases/v5.5.0/css/all.css");
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,300,400,700");
+$font-family-base: "Nunito";
+@import url("https://fonts.googleapis.com/css?family=PT+Sans:200,300,400,700");
+$headings-font-family: "PT Sans";
+
+$primary: #c6bd66;
+$secondary: #eed75a;
+$success: #fec100;
+$danger: #703b3b;
+$info: #63e792;
+$warning: #ffe869;
+$light: #fdfbf7;
+$dark: #555555;
+$enable-gradients: false;
+$spacer: 1.2rem;
+$border-width: 3px;
+$btn-border-radius: 1.35rem;
