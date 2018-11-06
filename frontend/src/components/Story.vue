@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import blockchain from '../blockchain'
+
 export default {
   props: ['story'],
   data() {
@@ -23,11 +25,8 @@ export default {
   },
   methods: {
     async onSubmit(story, word) {
+      await blockchain.addWord(story.id, word)
       this.word = ''
-      await this.addWord(story, word)
-    },
-    async addWord(story, word) {
-      // TODO Send transaction to blockchain to add new word
     }
   }
 }

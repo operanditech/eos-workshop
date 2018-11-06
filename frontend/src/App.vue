@@ -12,18 +12,31 @@
         <b-col>
           <b-form inline class="mb-2">
             <label class="mr-sm-2" for="search">Search</label>
-            <b-input class="mb-2 mb-sm-0" id="search" v-model="search"/>
+            <b-input-group class="mb-2 mb-sm-0">
+              <b-input id="search" v-model="search"/>
+              <b-input-group-append v-if="search">
+                <b-button variant="outline-dark" @click="search = ''">
+                  <i class="fas fa-times"></i>
+                </b-button>
+              </b-input-group-append>
+            </b-input-group>
           </b-form>
         </b-col>
         <b-col class="text-right">
-          <b-button v-b-modal.createStoryModal>Create new story</b-button>
+          <b-button v-b-modal.createStoryModal>
+            <i class="fas fa-edit"></i>
+            Create new story
+          </b-button>
         </b-col>
       </b-row>
       <div v-for="story in filteredStories" :key="story.name">
         <Story :story="story" class="mb-2"/>
       </div>
     </b-container>
-    <b-modal id="createStoryModal" title="Create Story" @ok="createStory(newStory.id, newStory.title)">
+    <b-modal id="createStoryModal"
+             title="Create Story"
+             @ok="createStory(newStory.id, newStory.title)"
+             @hidden="resetNewStory()">
       <b-form>
         <b-form-group label="Story ID"
                       label-for="storyId"
@@ -54,6 +67,7 @@
 
 <script>
 import Story from './components/Story.vue'
+import blockchain from './blockchain'
 
 export default {
   name: 'app',
@@ -62,16 +76,13 @@ export default {
   },
   data() {
     return {
-      stories: [
-        { id: 'randomstory', title: 'Dapp Tale', content: 'Once upon a time, there was a blockchain dapp' },
-        { id: 'anotherstory', title: 'Block Adventures', content: 'A block went out to travel through the network' }
-      ],
+      stories: [],
       search: '',
       newStory: { id: '', title: '' }
     }
   },
   async mounted() {
-    // TODO Load stories from blockchain
+    this.stories = await blockchain.fetchStories()
   },
   computed: {
     filteredStories() {
@@ -83,8 +94,12 @@ export default {
     }
   },
   methods: {
-    createStory(id, title) {
-      // TODO Send transaction to create the new story in the blockchain
+    async createStory(id, title) {
+      await blockchain.createStory(id, title)
+      this.search = id
+    },
+    resetNewStory() {
+      this.newStory = { id: '', title: '' }
     }
   }
 }
